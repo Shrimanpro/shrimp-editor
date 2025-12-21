@@ -5,6 +5,8 @@
 #include <ctype.h>
 #include <errno.h>
 
+/*** data ***/
+
 struct termios orig_termios;
 
 void die(const char *s)
@@ -12,6 +14,8 @@ void die(const char *s)
   perror(s);
   exit(1);
 }
+
+/*** terminal ***/
 
 void disableRawMode()
 {
@@ -42,6 +46,8 @@ void enableRawmode()
     die("tcsetattr");
   }
 }
+
+/*** init ***/
 
 int main()
 {
