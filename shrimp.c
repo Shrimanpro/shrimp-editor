@@ -398,7 +398,7 @@ void editorDrawRows(struct abuf *ab)
   int y;
   for (y = 0; y < E.screenrows; y++)
   {
-    int filerow = y + E.rowoff;
+    int filerow = y + E.rowoff; // problem might be this line
     if (filerow >= E.numrows)
     {
       if (E.numrows == 0 && y == E.screenrows / 3)
@@ -535,6 +535,19 @@ void editorProcessKeyPress()
     case PAGE_UP:
     case PAGE_DOWN:
       {
+        if (c == PAGE_UP)
+        {
+          E.cy = E.rowoff;
+        }
+        else if (c == PAGE_DOWN)
+        {
+          E.cy = E.rowoff + E.screenrows - 1;
+          if (E.cy > E.numrows)
+          {
+            E.cy = E.numrows;
+          }
+        }
+
         int times = E.screenrows;
         while (times--)
         {
