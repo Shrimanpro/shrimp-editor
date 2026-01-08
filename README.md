@@ -31,7 +31,7 @@ We rejected heavy libraries like `ncurses`. Why? Because true systems wizards in
 
 - [x] **Raw Mode**: Canonical mode disabled. We process bytes, not lines.
 - [ ] **Line Editing**: Surgical insertion and deletion.
-- [ ] **Infinite Scroll**: Viewports that handle files larger than your screen.
+- [X] **Infinite Scroll**: Viewports that handle files larger than your screen.
 - [ ] **Search**: Incremental search via linear scanning.
 - [ ] **Syntax Highlighting**: ANSI-colored keywords for C/C++.
 
