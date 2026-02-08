@@ -25,6 +25,7 @@
 
 enum editorKey 
 {
+  BACKSPACE = 127,
   ARROW_LEFT = 1000,
   ARROW_RIGHT,
   ARROW_UP,
@@ -607,6 +608,22 @@ void editorProcessKeyPress()
   int c = editorReadKey();
 
   switch (c) {
+    
+    case '\r':
+      // do something with enter key
+      break;
+
+    case BACKSPACE:
+    case CTRL_KEY('h'):
+    case DEL_KEY:
+      // do something with these 3 keys
+      break;
+     
+    case CTRL_KEY('l'):
+    case '\x1b':
+      break;
+    
+
     case CTRL_KEY('q'):
       write(STDOUT_FILENO, "\x1b[2J",4);
       write(STDOUT_FILENO, "\x1b[H",3);
