@@ -66,6 +66,10 @@ struct editorConfig
 
 struct editorConfig E;
 
+// needed function defs
+void editorSetStatusMessage(const char *fmt, ...);
+
+
 void die(const char *s)
 {
   write(STDOUT_FILENO, "\x1b[2J",4);
@@ -412,12 +416,14 @@ void editorSave()
       {
         close(fd);
         free(buf);
+        editorSetStatusMessage("%d bytes written to disk", len);
         return;
       }
     }
     close(fd);
   }
   free(buf);
+  editorSetStatusMessage("Can't save, I/O error %s", strerror(errno));
 }
 
 struct abuf 
@@ -763,7 +769,7 @@ int main(int argc, char *argv[])
     editorOpen(argv[1]);
   }
 
-  editorSetStatusMessage("Ctrl-q to quit");
+  editorSetStatusMessage("Ctrl-s to save | Ctrl-q to quit");
   
   while (1)
   {
