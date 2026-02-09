@@ -387,7 +387,6 @@ void editorOpen(char *filename)
   size_t linecap = 0;
   ssize_t linelen;
 
-  linelen = getline(&line, &linecap, fp);
   while ((linelen = getline(&line, &linecap, fp)) != -1)
   {
     while (linelen > 0 && (line[linelen - 1] == '\n' || line[linelen - 1] == '\r'))
@@ -520,7 +519,7 @@ void editorDrawRows(struct abuf *ab)
       {
         abAppend(ab, "~", 1);
       }
-    }
+    } 
     else 
     {
       int len = E.row[filerow].rsize - E.coloff;
@@ -751,7 +750,7 @@ void initEditor()
   E.cy = 0;
   E.rowoff = 0;
   E.coloff = 0;
-  E.numrows = 0;
+  E.numrows = 0; // changing this to 1 allows me to edit first line
   E.rx = 0;
   E.row = NULL;
   E.dirty = 0;
