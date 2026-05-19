@@ -30,7 +30,7 @@ We rejected heavy libraries like `ncurses`. Why? Because true systems wizards in
 ## 🛠️ The Arsenal (Features)
 
 - [x] **Raw Mode**: Canonical mode disabled. We process bytes, not lines.
-- [ ] **Line Editing**: Surgical insertion and deletion.
+- [x] **Line Editing**: Surgical insertion and deletion.
 - [X] **Infinite Scroll**: Viewports that handle files larger than your screen.
 - [ ] **Search**: Incremental search via linear scanning.
 - [ ] **Syntax Highlighting**: ANSI-colored keywords for C/C++.
@@ -66,8 +66,8 @@ Flickering is for amateurs. Shrimp utilizes a dynamic `abuf` (append buffer) str
 
 ## 🗺️ Roadmap
 * **Phase 1:** Raw mode & Input handling 
-* **Phase 2:** Viewport scrolling & File I/O (Current)
-* **Phase 3:** Search & Syntax Highlighting
+* **Phase 2:** Viewport scrolling & File I/O 
+* **Phase 3:** Search & Syntax Highlighting (Current)
 * **Phase 4:** Custom status bar
 
 ## 🤝 Contributing
