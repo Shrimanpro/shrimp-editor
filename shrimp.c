@@ -71,6 +71,7 @@ struct editorConfig E;
 // needed function defs
 void editorSetStatusMessage(const char *fmt, ...);
 void editorRefreshScreen();
+char *editorPrompt(char *prompt);
 
 
 void die(const char *s)
@@ -496,7 +497,12 @@ void editorSave()
 {
   if (E.filename == NULL)
   {
-    return;
+    E.filename = editorPrompt("Save as: %s (ESC to cancel)");
+    if (E.filename == NULL)
+    {
+      editorSetStatusMessage("Save Aborted.");
+      return;
+    }
   }
   int len;
   char *buf = editorRowsToString(&len);
@@ -717,7 +723,13 @@ char *editorPrompt(char *prompt)
     editorRefreshScreen();
 
     int c = editorReadKey();
-    if (c == '\r')
+    if (c == '\x1b')
+    {
+      editorSetStatusMessage("");
+      free(buf);
+      return NULL;
+    }
+    else if (c == '\r')
     {
       if (buflen != 0)
       {
