@@ -70,6 +70,7 @@ struct editorConfig E;
 
 // needed function defs
 void editorSetStatusMessage(const char *fmt, ...);
+void editorRefreshScreen();
 
 
 void die(const char *s)
@@ -700,6 +701,41 @@ void editorSetStatusMessage(const char *fmt, ...)
   vsnprintf(E.statusmsg, sizeof(E.statusmsg), fmt, ap);
   va_end(ap);
   E.statusmsg_time = time(NULL);
+}
+
+char *editorPrompt(char *prompt)
+{
+  size_t bufsize = 128;
+  char *buf = malloc(bufsize);
+
+  size_t buflen = 0;
+  buf[0] = '\0';
+
+  while (1) 
+  {
+    editorSetStatusMessage(prompt, buf);
+    editorRefreshScreen();
+
+    int c = editorReadKey();
+    if (c == '\r')
+    {
+      if (buflen != 0)
+      {
+        editorSetStatusMessage("");
+        return buf;
+      }
+    }
+    else if (!iscntrl(c) && c < 128)
+    {
+      if (buflen == bufsize - 1)
+      {
+        bufsize *= 2;
+        buf = realloc(buf, bufsize);
+      }
+      buf[buflen++] = c;
+      buf[buflen] = '\0';
+    }
+  }
 }
 
 void editorMoveCursor(int key)
