@@ -864,6 +864,10 @@ void editorProcessKeyPress()
       editorInsertNewline();
       break;
 
+    case CTRL_KEY('f'):
+      editorFind();
+      break;
+
     case BACKSPACE:
     case CTRL_KEY('h'):
     case DEL_KEY:
@@ -976,7 +980,7 @@ int main(int argc, char *argv[])
     editorOpen(argv[1]);
   }
 
-  editorSetStatusMessage("Ctrl-s to save | Ctrl-q to quit");
+  editorSetStatusMessage("Ctrl-s to save | Ctrl-q to quit | Ctrl-f to search");
   
   while (1)
   {
