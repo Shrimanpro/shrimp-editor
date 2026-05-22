@@ -277,6 +277,27 @@ int editorRowCxToRx(erow *row, int cx)
   return rx;
 }
 
+int editorRowRxToCx(erow *row, int rx)
+{
+  int cur_rx = 0;
+  int cx;
+  for (cx = 0; cx < row->size; cx++)
+  {
+    if (row->chars[cx] == '\t')
+    {
+      cur_rx += (TAB_STOP - 1) - (cur_rx % TAB_STOP);
+    }
+    cur_rx++;
+
+    if (cur_rx >rx)
+    {
+      return cx;
+    }
+  }
+  return cx;
+
+}
+
 void editorUpdateRow(erow *row)
 {
   int tabs = 0;
@@ -543,7 +564,7 @@ void editorFind()
     if (match)
     {
       E.cy = i;
-      E.cx = match - row->render;
+      E.cx = editorRowRxToCx(row, match - row->render);
       E.rowoff = E.numrows;
       break;
     }
