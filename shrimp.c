@@ -42,11 +42,13 @@ enum editorKey
 enum editorHighlight 
 {
   HL_NORMAL = 0,
+  HL_STRING,
   HL_NUMBER,
   HL_MATCH
 };
 
-#define HL_HIGHLIGHT_NUBERS (1<<0)
+#define HL_HIGHLIGHT_NUMBERS (1<<0)
+#define HL_HIGHLIGHT_STRINGS (1<<1)
 
 struct editorSyntax 
 {
@@ -91,7 +93,7 @@ struct editorSyntax HLDB[] =
   {
     "c",
     C_HL_extensions,
-    HL_HIGHLIGHT_NUBERS
+    HL_HIGHLIGHT_NUMBERS | HL_HIGHLIGHT_STRINGS
   },
 };
 
@@ -313,7 +315,7 @@ void editorUpdateSyntax(erow *row)
   {
     char c = row->render[i];
     unsigned char prev_hl = (i > 0) ? row->hl[i - 1] : HL_NORMAL;
-    if (E.syntax->flags & HL_HIGHLIGHT_NUBERS)
+    if (E.syntax->flags & HL_HIGHLIGHT_NUMBERS)
     {
       if ((isdigit(c) && (prev_sep || prev_hl == HL_NUMBER)) ||
         (c == '.' && prev_hl == HL_NUMBER))
@@ -338,6 +340,8 @@ int editorSyntaxToColor(int hl)
       return 31;
     case HL_MATCH:
       return 34;
+    case HL_STRING:
+      return 35;
     default:
       return 37;
   }
