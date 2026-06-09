@@ -33,7 +33,7 @@ We rejected heavy libraries like `ncurses`. Why? Because true systems wizards in
 - [x] **Line Editing**: Surgical insertion and deletion.
 - [X] **Infinite Scroll**: Viewports that handle files larger than your screen.
 - [x] **Search**: Incremental search via linear scanning.
-- [ ] **Syntax Highlighting**: ANSI-colored keywords for C/C++.
+- [x] **Syntax Highlighting**: ANSI-colored keywords for C/C++.
 
 ## 💾 Installation & Build
 
